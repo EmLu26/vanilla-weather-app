@@ -68,3 +68,22 @@ li:first-letter {
 #description {
   padding-bottom: 20px;
 }
+
+#celsius-link {
+  text-decoration: none;
+  padding-right: 5px;
+}
+
+#fahrenheit-link {
+  text-decoration: none;
+  padding-left: 5px;
+}
+
+.weather-temperature .active {
+  color: rgb(33, 33, 33);
+  cursor: default;
+}
+
+.weather-temperature .active:hover {
+  text-decoration: none;
+}
