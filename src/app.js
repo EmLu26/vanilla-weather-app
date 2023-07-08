@@ -8,6 +8,7 @@ function formatDate(timestamp) {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
+
   let days = [
     "Sunday",
     "Monday",
@@ -21,28 +22,55 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
-function displayForecast() {
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
+function displayForecast(response) {
+  console.log(response.data.daily);
+
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
-  let days = ["Thu", "Fri", "Sat", "Sun"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-              <div class="weather-forecast-date">
-              ${day}
-              </div>
-<img src="http://openweathermap.org./img/wn/50d@2x.png" alt="" width="42"/>
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
+      <div class="col-2">
+              <div class="weather-fore  let forecast = rcast-date"${formatDay(
+                forecastDay.dt
+              )}</div>
+<img 
+src="http://openweathermap.org./img/wn/${forecastDay.condition.icon}@2x.png" 
+    alt="" 
+    width="42"
+    />
 <div class="weather-forecast-temperatures">
-<span class="weather-forecast-temperatures-max"> 18&deg; </span>
-<span class="weather-forecast-temperatures-min"> 12&deg; </span>
+<span class="weather-forecast-temperatures-max"> ${Math.round(
+          forecastDay.temperature.maximum
+        )}&deg; </span>
+<span class="weather-forecast-temperatures-min"> ${Math.round(
+          forecastDay.temperature.minimum
+        )}&deg; </span>
 </div>
-            </div>`;
+            </div>
+            `;
+    }
   });
 
-  forecastHTML = forecastHTML + "</div>";
+  forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let apiKey = "6798e9t4f3cb9ef4o430784a938ec3f3";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function displayTemperature(response) {
@@ -54,7 +82,7 @@ function displayTemperature(response) {
   let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#icon");
 
-  celsiusTemperature = response.data.temperature.current;
+  let celsiusTemperature = response.data.temperature.current;
 
   temperatureElement.innerHTML = Math.round(response.data.temperature.current);
   cityElement.innerHTML = response.data.city;
@@ -67,6 +95,8 @@ function displayTemperature(response) {
     `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
   iconElement.setAttribute("alt", response.data.condition.description);
+
+  getForecast(response.data.coordinates);
 }
 
 function search(city) {
