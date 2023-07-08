@@ -10,6 +10,8 @@
       crossorigin="anonymous"
     />
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    
+    
     <link rel="stylesheet" href="src/style.css" />
     <title>Weather App</title>
   </head>
@@ -47,17 +49,15 @@
           <div class="row">
             <div class="col-6">
               <div class="d-flex weather-temperature">
-                <img
-                  src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-                  alt="Current Weather icon"
-                  id="icon"
-                />
+                <img src="" alt="Current Weather icon" id="icon" />
+                
                 <strong id="temperature"></strong
-                ><span class="units"></span>
-                  <a href="#" id="celsius-link" class="active">&deg;C</a>|  
+                ><span class="units"
+                  ><a href="#" id="celsius-link" class="active">&deg;C</a> |  
                   <a href="#" id="fahrenheit-link">&deg;F</a></span
                 >
               </div>
+            </div>
             </div>
             <div class="col-6">
               <ul>
@@ -66,7 +66,7 @@
               </ul>
             </div>
           </div>
-          </div>
+          <div class="weather-forecast" id="forecast"></div>
         </div>
         <small>
           <a
