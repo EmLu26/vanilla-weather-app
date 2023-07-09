@@ -19,7 +19,8 @@ li {
   list-style: none;
   margin: 0;
   padding: 0;
-  color: #878787;
+
+  color: rgb(135, 135, 135);
   font-size: 16px;
   font-weight: 100;
   line-height: 19px;
@@ -63,20 +64,6 @@ li:first-letter {
   top: -34px;
 }
 
-#description {
-  padding-bottom: 20px;
-}
-
-#celsius-link {
-  text-decoration: none;
-  padding-right: 5px;
-}
-
-#fahrenheit-link {
-  text-decoration: none;
-  padding-left: 5px;
-}
-
 .weather-temperature .active {
   color: rgb(33, 33, 33);
   cursor: default;
@@ -91,16 +78,16 @@ li:first-letter {
   text-align: center;
   color: #000;
 }
+
 .weather-forecast-date {
   font-size: 16px;
-  color: 000;
+  opacity: 0.5;
+}
+
+.weather-forecast-temperature-min {
   opacity: 0.5;
 }
 
 .weather-forecast-temperatures {
   font-size: 13px;
-}
-
-.weather-forecast-temperatures-min {
-  opacity: 0.5;
 }
